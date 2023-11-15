@@ -1,0 +1,77 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Sample API",
+      "version": "1.0.0"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+      "/usuarios": {
+        "get": {
+          "summary": "Retrieve all entries from usuarios",
+          "responses": {
+            "200": {
+              "description": "A list of usuarios entries",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/UsuarioEntry"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "UsuarioEntry": {
+        "type": "object",
+        "properties": {
+          "IdUsuario": {
+            "type": "integer"
+          },
+          "UsernameUsuario": {
+            "type": "string"
+          },
+          "CorreoUsuario": {
+            "type": "string"
+          },
+          "PasswordUsuario": {
+            "type": "string"
+          },
+          "NombresUsuario": {
+            "type": "string"
+          },
+          "ApellidoPUsuario": {
+            "type": "string"
+          },
+          "ApellidoMUsuario": {
+            "type": "string"
+          },
+          "FechaNacimientoUsuario": {
+            "type": "string",
+            "format": "date"
+          },
+          "DireccionUsuarioCalle": {
+            "type": "string"
+          },
+          "GeneroUsuario": {
+            "type": "string"
+          },
+          "TelefonoUsuario": {
+            "type": "string"
+          },
+          "FechaCreacionUsuario": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Administrador": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+  
