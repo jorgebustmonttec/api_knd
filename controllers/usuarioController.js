@@ -26,3 +26,45 @@ exports.registerUsuario = (req, res) => {
         res.status(200).send("Usuario registered successfully.");
     });
 };
+
+exports.getUsuarioArticulos = (req, res) => {
+  const userId = req.params.id;
+  const sql = "SELECT * FROM articulousuario WHERE IdUsuario = ?";
+  db.query(sql, [userId], (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      if (results.length === 0) {
+          return res.status(404).json({ message: 'No articles found for this usuario.' });
+      }
+      res.json(results);
+  });
+};
+
+exports.getUsuarioInventario = (req, res) => {
+  const userId = req.params.id;
+  const sql = "SELECT * FROM inventariousuario WHERE IdUsuario = ?";
+  db.query(sql, [userId], (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      if (results.length === 0) {
+          return res.status(404).json({ message: 'Inventory not found for this usuario.' });
+      }
+      res.json(results);
+  });
+};
+
+exports.getUsuarioById = (req, res) => {
+  const userId = req.params.id;
+  const sql = "SELECT * FROM usuarios WHERE IdUsuario = ?";
+  db.query(sql, [userId], (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      if (result.length === 0) {
+          return res.status(404).json({ message: 'Usuario not found.' });
+      }
+      res.json(result[0]); // Return the first (and should be only) result.
+  });
+};
