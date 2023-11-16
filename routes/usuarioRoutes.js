@@ -101,4 +101,103 @@ router.get('/', usuarioController.getAllUsuarios);
  */
 router.post('/register', usuarioController.registerUsuario);
 
+/**
+ * @swagger
+ * /usuarios/{id}/articulos:
+ *   get:
+ *     summary: Retrieve articles owned by a specific usuario
+ *     description: Retrieve a list of article IDs that a specific usuario owns.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to get articles for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: A list of articles owned by the usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdArticulo:
+ *                     type: integer
+ *                     description: The unique identifier of the article.
+ *       404:
+ *         description: Usuario not found.
+ */
+router.get('/:id/articulos', usuarioController.getUsuarioArticulos);
+
+/**
+ * @swagger
+ * /usuarios/{id}/inventario:
+ *   get:
+ *     summary: Retrieve the inventory of a specific usuario
+ *     description: Retrieve the inventory details for a specific usuario.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to get the inventory for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: The inventory of the usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdInventario:
+ *                     type: integer
+ *                     description: The unique identifier for the inventory entry.
+ *                   IdUsuario:
+ *                     type: integer
+ *                   IdMarco:
+ *                     type: integer
+ *                   IdVehiculo:
+ *                     type: integer
+ *                   IdCabeza:
+ *                     type: integer
+ *                   IdCuerpo:
+ *                     type: integer
+ *       404:
+ *         description: Usuario not found.
+ */
+router.get('/:id/inventario', usuarioController.getUsuarioInventario);
+
+
+/**
+ * @swagger
+ * /usuarios/{id}:
+ *   get:
+ *     summary: Retrieve a specific usuario by ID
+ *     description: Retrieve details of a specific usuario by their unique identifier.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to retrieve.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Detailed information about the usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Usuario'
+ *       404:
+ *         description: Usuario not found.
+ */
+router.get('/:id', usuarioController.getUsuarioById);
+
+
 module.exports = router;

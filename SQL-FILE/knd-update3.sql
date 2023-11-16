@@ -26,10 +26,9 @@ DROP TABLE IF EXISTS `articulos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `articulos` (
   `IdArticulo` int NOT NULL AUTO_INCREMENT,
-  `TipoCompra` enum('Gemas','Dinero','Gratis') COLLATE utf8mb4_general_ci NOT NULL,
-  `TipoArticulo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `NombreArticulo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `DescripcionArticulo` text COLLATE utf8mb4_general_ci,
+  `TipoCompra` enum('Gemas','Dinero','Gratis') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `NombreArticulo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `DescripcionArticulo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `PrecioArticulo` decimal(10,2) NOT NULL,
   `ClaseArticulo` int NOT NULL,
   `ExclusivoCofre` tinyint(1) NOT NULL,
@@ -46,7 +45,7 @@ CREATE TABLE `articulos` (
 
 LOCK TABLES `articulos` WRITE;
 /*!40000 ALTER TABLE `articulos` DISABLE KEYS */;
-INSERT INTO `articulos` VALUES (1,'Dinero','5','Paquete de Gemas Pequeño','Un paquete pequeño de gemas',50.00,1,0,NULL),(2,'Dinero','5','Paquete de Gemas Mediano','Un paquete mediano de gemas',100.00,1,0,NULL),(3,'Dinero','5','Paquete de Gemas Grande','Un paquete grande de gemas',200.00,1,0,NULL),(4,'Dinero','5','Paquete de Gemas Pequeño','Un paquete pequeño de gemas',50.00,1,0,NULL),(5,'Dinero','5','Paquete de Gemas Mediano','Un paquete mediano de gemas',100.00,1,0,NULL),(6,'Dinero','5','Paquete de Gemas Grande','Un paquete grande de gemas',200.00,1,0,NULL),(7,'Dinero','6','Caja de Botín Bronce','Una caja de botín de nivel bronce',100.00,2,0,NULL),(8,'Dinero','6','Caja de Botín Plata','Una caja de botín de nivel plata',200.00,3,0,NULL),(9,'Dinero','6','Caja de Botín Oro','Una caja de botín de nivel oro',300.00,4,0,NULL),(10,'Gratis','4','Camiseta Sorteo Tec','Una camiseta azul con el logo de Sorteo Tec',0.00,1,0,NULL),(11,'Gemas','1','Marco Futurista','Un marco con diseño futurista para tu perfil',40.00,3,0,NULL),(12,'Gemas','2','Moto Veloz','Una moto rápida para moverte con estilo',70.00,3,0,NULL),(13,'Gemas','3','Casco Espacial','Un casco con diseño de astronauta',35.00,3,0,NULL),(14,'Gemas','4','Armadura de Batalla','Una armadura inspirada en guerreros futuristas',80.00,3,0,NULL),(15,'Gemas','3','Sombrero de Vaquero','Un sombrero clásico del oeste',20.00,2,0,NULL),(16,'Gemas','1','Marco de Lujo','Un marco decorado con joyas y oro',0.00,4,1,NULL),(17,'Gemas','2','Coche Clásico','Un elegante coche clásico',0.00,4,1,NULL),(18,'Gemas','3','Visera Cibernética','Una visera con tecnología del futuro',0.00,3,1,NULL),(19,'Gemas','4','Capa de Superhéroe','Una capa digna de un superhéroe',0.00,3,1,NULL),(20,'Gemas','3','Antifaz Misterioso','Un antifaz para ocultar tu identidad',0.00,2,1,NULL),(21,'Gemas','2','Supercar Legendario','El modelo más exclusivo y rápido, con diseño futurista',0.00,4,1,NULL),(22,'Gratis','1','Marco Estándar Sorteo Tec','Un marco estandarizado para todos los usuarios',0.00,1,0,NULL),(23,'Gratis','2','Delivery Van Sorteo Tec','Una furgoneta de entrega básica con el logo de Sorteo Tec',0.00,1,0,NULL),(24,'Gratis','3','Gorra Sorteo Tec','Una gorra básica con el logo de Sorteo Tec',0.00,1,0,NULL),(25,'Gratis','4','Camiseta Sorteo Tec','Una camiseta básica con el logo de Sorteo Tec',0.00,1,0,NULL);
+INSERT INTO `articulos` VALUES (1,'Dinero','Paquete de Gemas Pequeño','Un paquete pequeño de gemas',50.00,1,0,5),(2,'Dinero','Paquete de Gemas Mediano','Un paquete mediano de gemas',100.00,1,0,5),(3,'Dinero','Paquete de Gemas Grande','Un paquete grande de gemas',200.00,1,0,5),(4,'Dinero','Paquete de Gemas Pequeño','Un paquete pequeño de gemas',50.00,1,0,5),(5,'Dinero','Paquete de Gemas Mediano','Un paquete mediano de gemas',100.00,1,0,5),(6,'Dinero','Paquete de Gemas Grande','Un paquete grande de gemas',200.00,1,0,5),(7,'Dinero','Caja de Botín Bronce','Una caja de botín de nivel bronce',100.00,2,0,6),(8,'Dinero','Caja de Botín Plata','Una caja de botín de nivel plata',200.00,3,0,6),(9,'Dinero','Caja de Botín Oro','Una caja de botín de nivel oro',300.00,4,0,6),(10,'Gratis','Camiseta Sorteo Tec','Una camiseta azul con el logo de Sorteo Tec',0.00,1,0,4),(11,'Gemas','Marco Futurista','Un marco con diseño futurista para tu perfil',40.00,3,0,1),(12,'Gemas','Moto Veloz','Una moto rápida para moverte con estilo',70.00,3,0,2),(13,'Gemas','Casco Espacial','Un casco con diseño de astronauta',35.00,3,0,3),(14,'Gemas','Armadura de Batalla','Una armadura inspirada en guerreros futuristas',80.00,3,0,4),(15,'Gemas','Sombrero de Vaquero','Un sombrero clásico del oeste',20.00,2,0,3),(16,'Gemas','Marco de Lujo','Un marco decorado con joyas y oro',0.00,4,1,1),(17,'Gemas','Coche Clásico','Un elegante coche clásico',0.00,4,1,2),(18,'Gemas','Visera Cibernética','Una visera con tecnología del futuro',0.00,3,1,3),(19,'Gemas','Capa de Superhéroe','Una capa digna de un superhéroe',0.00,3,1,4),(20,'Gemas','Antifaz Misterioso','Un antifaz para ocultar tu identidad',0.00,2,1,3),(21,'Gemas','Supercar Legendario','El modelo más exclusivo y rápido, con diseño futurista',0.00,4,1,2),(22,'Gratis','Marco Estándar Sorteo Tec','Un marco estandarizado para todos los usuarios',0.00,1,0,1),(23,'Gratis','Delivery Van Sorteo Tec','Una furgoneta de entrega básica con el logo de Sorteo Tec',0.00,1,0,2),(24,'Gratis','Gorra Sorteo Tec','Una gorra básica con el logo de Sorteo Tec',0.00,1,0,3),(25,'Gratis','Camiseta Sorteo Tec','Una camiseta básica con el logo de Sorteo Tec',0.00,1,0,4);
 /*!40000 ALTER TABLE `articulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +72,7 @@ CREATE TABLE `articulousuario` (
 
 LOCK TABLES `articulousuario` WRITE;
 /*!40000 ALTER TABLE `articulousuario` DISABLE KEYS */;
-INSERT INTO `articulousuario` VALUES (10,22),(10,23),(10,24),(10,25),(11,22),(11,23),(11,24),(11,25),(12,22),(12,23),(12,24),(12,25),(13,22),(13,23),(13,24),(13,25),(14,22),(14,23),(14,24),(14,25),(15,22),(15,23),(15,24),(15,25),(16,22),(16,23),(16,24),(16,25),(17,22),(17,23),(17,24),(17,25),(18,22),(18,23),(18,24),(18,25),(19,22),(19,23),(19,24),(19,25),(20,22),(20,23),(20,24),(20,25),(21,22),(21,23),(21,24),(21,25),(22,22),(22,23),(22,24),(22,25),(23,22),(23,23),(23,24),(23,25),(24,22),(24,23),(24,24),(24,25),(25,22),(25,23),(25,24),(25,25),(26,22),(26,23),(26,24),(26,25),(27,22),(27,23),(27,24),(27,25),(28,22),(28,23),(28,24),(28,25),(29,22),(29,23),(29,24),(29,25);
+INSERT INTO `articulousuario` VALUES (1,22),(1,23),(1,24),(1,25),(2,22),(2,23),(2,24),(2,25),(3,22),(3,23),(3,24),(3,25),(4,22),(4,23),(4,24),(4,25),(5,22),(5,23),(5,24),(5,25),(6,22),(6,23),(6,24),(6,25),(7,22),(7,23),(7,24),(7,25),(8,22),(8,23),(8,24),(8,25),(9,22),(9,23),(9,24),(9,25),(10,22),(10,23),(10,24),(10,25),(11,22),(11,23),(11,24),(11,25),(12,22),(12,23),(12,24),(12,25),(13,22),(13,23),(13,24),(13,25),(14,22),(14,23),(14,24),(14,25),(15,22),(15,23),(15,24),(15,25),(16,22),(16,23),(16,24),(16,25),(17,22),(17,23),(17,24),(17,25),(18,22),(18,23),(18,24),(18,25),(19,22),(19,23),(19,24),(19,25),(20,22),(20,23),(20,24),(20,25),(21,22),(21,23),(21,24),(21,25),(22,22),(22,23),(22,24),(22,25),(23,22),(23,23),(23,24),(23,25),(24,22),(24,23),(24,24),(24,25),(25,22),(25,23),(25,24),(25,25),(26,22),(26,23),(26,24),(26,25),(27,22),(27,23),(27,24),(27,25),(28,22),(28,23),(28,24),(28,25),(29,22),(29,23),(29,24),(29,25),(30,22),(30,23),(30,24),(30,25),(31,22),(31,23),(31,24),(31,25),(41,22),(41,23),(41,24),(41,25);
 /*!40000 ALTER TABLE `articulousuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +101,7 @@ CREATE TABLE `inventariousuario` (
   CONSTRAINT `inventariousuario_ibfk_3` FOREIGN KEY (`IdVehiculo`, `IdUsuario`) REFERENCES `articulousuario` (`IdArticulo`, `IdUsuario`),
   CONSTRAINT `inventariousuario_ibfk_4` FOREIGN KEY (`IdCabeza`, `IdUsuario`) REFERENCES `articulousuario` (`IdArticulo`, `IdUsuario`),
   CONSTRAINT `inventariousuario_ibfk_5` FOREIGN KEY (`IdCuerpo`, `IdUsuario`) REFERENCES `articulousuario` (`IdArticulo`, `IdUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +110,7 @@ CREATE TABLE `inventariousuario` (
 
 LOCK TABLES `inventariousuario` WRITE;
 /*!40000 ALTER TABLE `inventariousuario` DISABLE KEYS */;
-INSERT INTO `inventariousuario` VALUES (1,10,22,23,24,25),(2,11,22,23,24,25),(3,12,22,23,24,25),(4,13,22,23,24,25),(5,14,22,23,24,25),(6,15,22,23,24,25),(7,16,22,23,24,25),(8,17,22,23,24,25),(9,18,22,23,24,25),(10,19,22,23,24,25),(11,20,22,23,24,25),(12,21,22,23,24,25),(13,22,22,23,24,25),(14,23,22,23,24,25),(15,24,22,23,24,25),(16,25,22,23,24,25),(17,26,22,23,24,25),(18,27,22,23,24,25),(19,28,22,23,24,25),(20,29,22,23,24,25);
+INSERT INTO `inventariousuario` VALUES (1,10,22,23,24,25),(2,11,22,23,24,25),(3,12,22,23,24,25),(4,13,22,23,24,25),(5,14,22,23,24,25),(6,15,22,23,24,25),(7,16,22,23,24,25),(8,17,22,23,24,25),(9,18,22,23,24,25),(10,19,22,23,24,25),(11,20,22,23,24,25),(12,21,22,23,24,25),(13,22,22,23,24,25),(14,23,22,23,24,25),(15,24,22,23,24,25),(16,25,22,23,24,25),(17,26,22,23,24,25),(18,27,22,23,24,25),(19,28,22,23,24,25),(20,29,22,23,24,25),(21,30,22,23,24,25),(22,31,22,23,24,25),(32,41,22,23,24,25),(33,1,22,23,24,25),(34,2,22,23,24,25),(35,3,22,23,24,25),(36,4,22,23,24,25),(37,5,22,23,24,25),(38,6,22,23,24,25),(39,7,22,23,24,25),(40,8,22,23,24,25),(41,9,22,23,24,25);
 /*!40000 ALTER TABLE `inventariousuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -156,6 +155,7 @@ CREATE TABLE `logjuego` (
   `TiempoInicio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `DuracionJuego` bigint DEFAULT NULL,
   `Puntuacion` int DEFAULT NULL,
+  `GemasGanadas` int DEFAULT '0',
   PRIMARY KEY (`idlogJuego`),
   KEY `IdUsuario` (`IdUsuario`),
   CONSTRAINT `logjuego_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`IdUsuario`)
@@ -182,7 +182,7 @@ CREATE TABLE `logusuario` (
   `IdLog` int NOT NULL AUTO_INCREMENT,
   `IdUsuario` int DEFAULT NULL,
   `TiempoLog` datetime DEFAULT NULL,
-  `TipoLog` enum('login','logoff') COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `TipoLog` enum('login','logoff') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`IdLog`),
   KEY `IdUsuario` (`IdUsuario`),
   CONSTRAINT `logusuario_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`IdUsuario`)
@@ -207,7 +207,7 @@ DROP TABLE IF EXISTS `tipoarticulo`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipoarticulo` (
   `TipoArticuloID` int NOT NULL AUTO_INCREMENT,
-  `DescripcionTipo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `DescripcionTipo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`TipoArticuloID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -234,7 +234,7 @@ CREATE TABLE `transaccionesdineroreal` (
   `idUsuario` int DEFAULT NULL,
   `TiempoTransaccion` datetime DEFAULT NULL,
   `idArticulo` int DEFAULT NULL,
-  `Tipo` enum('Compra','Retorno','Regalo') COLLATE utf8mb4_general_ci NOT NULL,
+  `Tipo` enum('Compra','Retorno','Regalo') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `CantidadGemasOtorgadas` int DEFAULT NULL,
   PRIMARY KEY (`idTransaccion`),
   KEY `idUsuario` (`idUsuario`),
@@ -265,9 +265,9 @@ CREATE TABLE `transaccionesgemas` (
   `idUsuario` int DEFAULT NULL,
   `TiempoTransaccion` datetime DEFAULT NULL,
   `idArticulo` int DEFAULT NULL,
-  `Tipo` enum('Compra','Regalo') COLLATE utf8mb4_general_ci NOT NULL,
+  `Tipo` enum('Compra','Regalo') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `CantidadGemas` int DEFAULT NULL,
-  `Detalle` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Detalle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `CompraDineroRealID` int DEFAULT NULL,
   PRIMARY KEY (`idTransaccion`),
   KEY `idUsuario` (`idUsuario`),
@@ -297,20 +297,20 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `IdUsuario` int NOT NULL AUTO_INCREMENT,
-  `UsernameUsuario` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CorreoUsuario` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `PasswordUsuario` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `NombresUsuario` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ApellidoPUsuario` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ApellidoMUsuario` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `UsernameUsuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `CorreoUsuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `PasswordUsuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `NombresUsuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ApellidoPUsuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ApellidoMUsuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `FechaNacimientoUsuario` date DEFAULT NULL,
-  `DireccionUsuarioCalle` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `GeneroUsuario` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `TelefonoUsuario` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `DireccionUsuarioCalle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `GeneroUsuario` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `TelefonoUsuario` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `FechaCreacionUsuario` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Administrador` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`IdUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +319,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (10,'adminuser','admin@example.com','admin123','Admin','User','Admin','1980-01-01','123 Admin Street','Otro','1234567890','2023-11-14 00:40:41',1),(11,'johndoe','john.doe@example.com','password123','John','Doe','Smith','1992-05-10','456 Main Street','Masculino','2345678901','2023-11-14 00:40:41',0),(12,'janedoe','jane.doe@example.com','janeDoe2023','Jane','Doe','Johnson','1990-03-15','789 Side Street','Femenino','3456789012','2023-11-14 00:40:41',0),(13,'mariagarcia','maria.garcia@example.com','mariaG2023','Maria','Garcia','Lopez','1995-07-20','1010 Long Road','Femenino','4567890123','2023-11-14 00:40:41',0),(14,'davidmartinez','david.martinez@example.com','davidM2023','David','Martinez','Fernandez','1988-11-30','1111 Short Lane','Masculino','5678901234','2023-11-14 00:40:41',0),(15,'sarahbrown','sarah.brown@example.com','sarahB2023','Sarah','Brown','Wilson','1993-02-24','1212 Maple Ave','Femenino','6789012345','2023-11-14 00:40:41',0),(16,'michaelwhite','michael.white@example.com','michaelW2023','Michael','White','Green','1987-09-17','1313 Oak St','Masculino','7890123456','2023-11-14 00:40:41',0),(17,'emilygomez','emily.gomez@example.com','emilyG2023','Emily','Gomez','Davis','1996-12-05','1414 Pine St','Femenino','8901234567','2023-11-14 00:40:41',0),(18,'jamesjohnson','james.johnson@example.com','jamesJ2023','James','Johnson','Miller','1991-06-19','1515 Birch Rd','Masculino','9012345678','2023-11-14 00:40:41',0),(19,'lindasmith','linda.smith@example.com','lindaS2023','Linda','Smith','Martinez','1994-04-08','1616 Cedar Blvd','Femenino','0123456789','2023-11-14 00:40:41',0),(20,'carloslopez','carlos.lopez@example.com','carlosL2023','Carlos','Lopez','Hernandez','1989-08-23','1717 Elm St','Masculino','1234509876','2023-11-14 00:40:41',0),(21,'elizabethgomez','elizabeth.gomez@example.com','elizabethG2023','Elizabeth','Gomez','Perez','1997-10-12','1818 Spruce Ave','Femenino','2345609876','2023-11-14 00:40:41',0),(22,'williamjones','william.jones@example.com','williamJ2023','William','Jones','Garcia','1986-01-22','1919 Fir St','Masculino','3456709876','2023-11-14 00:40:41',0),(23,'amysanchez','amy.sanchez@example.com','amyS2023','Amy','Sanchez','Rodriguez','1999-03-31','2020 Hazel Way','Femenino','4567809876','2023-11-14 00:40:41',0),(24,'joseramirez','jose.ramirez@example.com','joseR2023','Jose','Ramirez','Morales','1998-07-14','2121 Maple Dr','Masculino','5678909876','2023-11-14 00:40:41',0),(25,'laura_martinez','laura.martinez@example.com','LauraM2023','Laura','Martinez','Reyes','1996-08-15','2222 Cherry Ln','Femenino','6678909876','2023-11-14 00:41:25',0),(26,'kevin_rodriguez','kevin.rodriguez@example.com','KevinR2023','Kevin','Rodriguez','Castillo','1991-11-25','2323 Apple Rd','Masculino','7789019876','2023-11-14 00:41:25',0),(27,'sophia_perez','sophia.perez@example.com','SophiaP2023','Sophia','Perez','Vasquez','1994-10-10','2424 Banana St','Femenino','8890129876','2023-11-14 00:41:25',0),(28,'alejandro_gomez','alejandro.gomez@example.com','AlejandroG2023','Alejandro','Gomez','Diaz','1990-02-20','2525 Grape Ave','Masculino','9901239876','2023-11-14 00:41:25',0),(29,'isabella_flores','isabella.flores@example.com','IsabellaF2023','Isabella','Flores','Torres','1998-05-05','2626 Peach Blvd','Femenino','10123459876','2023-11-14 00:41:25',0);
+INSERT INTO `usuarios` VALUES (1,'admin','admin@example.com','adminpass','Admin','Admin','Admin','1990-01-01','Admin Street 1','Masculino','555-0001','2023-11-15 19:12:24',1),(2,'maria.garcia','maria.garcia@example.com','password2','Maria','Garcia','Lopez','1991-02-02','Oak Street 2','Femenino','555-0002','2023-11-15 19:12:24',0),(3,'jose.martinez','jose.martinez@example.com','password3','Jose','Martinez','Hernandez','1992-03-03','Pine Street 3','Masculino','555-0003','2023-11-15 19:12:24',0),(4,'laura.hernandez','laura.hernandez@example.com','password4','Laura','Hernandez','Gonzalez','1993-04-04','Maple Street 4','Femenino','555-0004','2023-11-15 19:12:24',0),(5,'david.lopez','david.lopez@example.com','password5','David','Lopez','Perez','1994-05-05','Cedar Street 5','Masculino','555-0005','2023-11-15 19:12:24',0),(6,'sofia.gonzalez','sofia.gonzalez@example.com','password6','Sofia','Gonzalez','Sanchez','1995-06-06','Birch Street 6','Femenino','555-0006','2023-11-15 19:12:24',0),(7,'daniel.sanchez','daniel.sanchez@example.com','password7','Daniel','Sanchez','Ramirez','1996-07-07','Spruce Street 7','Masculino','555-0007','2023-11-15 19:12:24',0),(8,'isabella.perez','isabella.perez@example.com','password8','Isabella','Perez','Flores','1997-08-08','Willow Street 8','Femenino','555-0008','2023-11-15 19:12:24',0),(9,'mateo.ramirez','mateo.ramirez@example.com','password9','Mateo','Ramirez','Castro','1998-09-09','Elm Street 9','Masculino','555-0009','2023-11-15 19:12:24',0),(10,'adminuser','admin@example.com','admin123','Admin','User','Admin','1980-01-01','123 Admin Street','Otro','1234567890','2023-11-14 00:40:41',1),(11,'johndoe','john.doe@example.com','password123','John','Doe','Smith','1992-05-10','456 Main Street','Masculino','2345678901','2023-11-14 00:40:41',0),(12,'janedoe','jane.doe@example.com','janeDoe2023','Jane','Doe','Johnson','1990-03-15','789 Side Street','Femenino','3456789012','2023-11-14 00:40:41',0),(13,'mariagarcia','maria.garcia@example.com','mariaG2023','Maria','Garcia','Lopez','1995-07-20','1010 Long Road','Femenino','4567890123','2023-11-14 00:40:41',0),(14,'davidmartinez','david.martinez@example.com','davidM2023','David','Martinez','Fernandez','1988-11-30','1111 Short Lane','Masculino','5678901234','2023-11-14 00:40:41',0),(15,'sarahbrown','sarah.brown@example.com','sarahB2023','Sarah','Brown','Wilson','1993-02-24','1212 Maple Ave','Femenino','6789012345','2023-11-14 00:40:41',0),(16,'michaelwhite','michael.white@example.com','michaelW2023','Michael','White','Green','1987-09-17','1313 Oak St','Masculino','7890123456','2023-11-14 00:40:41',0),(17,'emilygomez','emily.gomez@example.com','emilyG2023','Emily','Gomez','Davis','1996-12-05','1414 Pine St','Femenino','8901234567','2023-11-14 00:40:41',0),(18,'jamesjohnson','james.johnson@example.com','jamesJ2023','James','Johnson','Miller','1991-06-19','1515 Birch Rd','Masculino','9012345678','2023-11-14 00:40:41',0),(19,'lindasmith','linda.smith@example.com','lindaS2023','Linda','Smith','Martinez','1994-04-08','1616 Cedar Blvd','Femenino','0123456789','2023-11-14 00:40:41',0),(20,'carloslopez','carlos.lopez@example.com','carlosL2023','Carlos','Lopez','Hernandez','1989-08-23','1717 Elm St','Masculino','1234509876','2023-11-14 00:40:41',0),(21,'elizabethgomez','elizabeth.gomez@example.com','elizabethG2023','Elizabeth','Gomez','Perez','1997-10-12','1818 Spruce Ave','Femenino','2345609876','2023-11-14 00:40:41',0),(22,'williamjones','william.jones@example.com','williamJ2023','William','Jones','Garcia','1986-01-22','1919 Fir St','Masculino','3456709876','2023-11-14 00:40:41',0),(23,'amysanchez','amy.sanchez@example.com','amyS2023','Amy','Sanchez','Rodriguez','1999-03-31','2020 Hazel Way','Femenino','4567809876','2023-11-14 00:40:41',0),(24,'joseramirez','jose.ramirez@example.com','joseR2023','Jose','Ramirez','Morales','1998-07-14','2121 Maple Dr','Masculino','5678909876','2023-11-14 00:40:41',0),(25,'laura_martinez','laura.martinez@example.com','LauraM2023','Laura','Martinez','Reyes','1996-08-15','2222 Cherry Ln','Femenino','6678909876','2023-11-14 00:41:25',0),(26,'kevin_rodriguez','kevin.rodriguez@example.com','KevinR2023','Kevin','Rodriguez','Castillo','1991-11-25','2323 Apple Rd','Masculino','7789019876','2023-11-14 00:41:25',0),(27,'sophia_perez','sophia.perez@example.com','SophiaP2023','Sophia','Perez','Vasquez','1994-10-10','2424 Banana St','Femenino','8890129876','2023-11-14 00:41:25',0),(28,'alejandro_gomez','alejandro.gomez@example.com','AlejandroG2023','Alejandro','Gomez','Diaz','1990-02-20','2525 Grape Ave','Masculino','9901239876','2023-11-14 00:41:25',0),(29,'isabella_flores','isabella.flores@example.com','IsabellaF2023','Isabella','Flores','Torres','1998-05-05','2626 Peach Blvd','Femenino','10123459876','2023-11-14 00:41:25',0),(30,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-11-15 01:31:08',0),(31,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-11-15 01:31:14',0),(41,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-11-15 19:02:25',0);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -365,4 +365,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-14 18:40:59
+-- Dump completed on 2023-11-15 19:08:25
