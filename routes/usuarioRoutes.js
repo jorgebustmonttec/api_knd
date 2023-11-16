@@ -199,5 +199,33 @@ router.get('/:id/inventario', usuarioController.getUsuarioInventario);
  */
 router.get('/:id', usuarioController.getUsuarioById);
 
+/**
+ * @swagger
+ * /usuarios/{id}/admin:
+ *   get:
+ *     summary: Check admin status of a usuario
+ *     description: Retrieve the admin status for a specific usuario.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to check admin status for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Admin status of the usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 Administrador:
+ *                   type: boolean
+ *       404:
+ *         description: Usuario not found.
+ */
+router.get('/:id/admin', usuarioController.checkAdminStatus);
+
 
 module.exports = router;

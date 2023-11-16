@@ -68,3 +68,18 @@ exports.getUsuarioById = (req, res) => {
       res.json(result[0]); // Return the first (and should be only) result.
   });
 };
+
+
+exports.checkAdminStatus = (req, res) => {
+  const userId = req.params.id;
+  const sql = "SELECT Administrador FROM usuarios WHERE IdUsuario = ?";
+  db.query(sql, [userId], (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      if (result.length === 0) {
+          return res.status(404).json({ message: 'Usuario not found.' });
+      }
+      res.json({ Administrador: result[0].Administrador });
+  });
+};
