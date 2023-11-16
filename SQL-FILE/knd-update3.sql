@@ -27,7 +27,6 @@ DROP TABLE IF EXISTS `articulos`;
 CREATE TABLE `articulos` (
   `IdArticulo` int NOT NULL AUTO_INCREMENT,
   `TipoCompra` enum('Gemas','Dinero','Gratis') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `TipoArticulo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `NombreArticulo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `DescripcionArticulo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `PrecioArticulo` decimal(10,2) NOT NULL,
@@ -46,7 +45,7 @@ CREATE TABLE `articulos` (
 
 LOCK TABLES `articulos` WRITE;
 /*!40000 ALTER TABLE `articulos` DISABLE KEYS */;
-INSERT INTO `articulos` VALUES (1,'Dinero','5','Paquete de Gemas Pequeño','Un paquete pequeño de gemas',50.00,1,0,NULL),(2,'Dinero','5','Paquete de Gemas Mediano','Un paquete mediano de gemas',100.00,1,0,NULL),(3,'Dinero','5','Paquete de Gemas Grande','Un paquete grande de gemas',200.00,1,0,NULL),(4,'Dinero','5','Paquete de Gemas Pequeño','Un paquete pequeño de gemas',50.00,1,0,NULL),(5,'Dinero','5','Paquete de Gemas Mediano','Un paquete mediano de gemas',100.00,1,0,NULL),(6,'Dinero','5','Paquete de Gemas Grande','Un paquete grande de gemas',200.00,1,0,NULL),(7,'Dinero','6','Caja de Botín Bronce','Una caja de botín de nivel bronce',100.00,2,0,NULL),(8,'Dinero','6','Caja de Botín Plata','Una caja de botín de nivel plata',200.00,3,0,NULL),(9,'Dinero','6','Caja de Botín Oro','Una caja de botín de nivel oro',300.00,4,0,NULL),(10,'Gratis','4','Camiseta Sorteo Tec','Una camiseta azul con el logo de Sorteo Tec',0.00,1,0,NULL),(11,'Gemas','1','Marco Futurista','Un marco con diseño futurista para tu perfil',40.00,3,0,NULL),(12,'Gemas','2','Moto Veloz','Una moto rápida para moverte con estilo',70.00,3,0,NULL),(13,'Gemas','3','Casco Espacial','Un casco con diseño de astronauta',35.00,3,0,NULL),(14,'Gemas','4','Armadura de Batalla','Una armadura inspirada en guerreros futuristas',80.00,3,0,NULL),(15,'Gemas','3','Sombrero de Vaquero','Un sombrero clásico del oeste',20.00,2,0,NULL),(16,'Gemas','1','Marco de Lujo','Un marco decorado con joyas y oro',0.00,4,1,NULL),(17,'Gemas','2','Coche Clásico','Un elegante coche clásico',0.00,4,1,NULL),(18,'Gemas','3','Visera Cibernética','Una visera con tecnología del futuro',0.00,3,1,NULL),(19,'Gemas','4','Capa de Superhéroe','Una capa digna de un superhéroe',0.00,3,1,NULL),(20,'Gemas','3','Antifaz Misterioso','Un antifaz para ocultar tu identidad',0.00,2,1,NULL),(21,'Gemas','2','Supercar Legendario','El modelo más exclusivo y rápido, con diseño futurista',0.00,4,1,NULL),(22,'Gratis','1','Marco Estándar Sorteo Tec','Un marco estandarizado para todos los usuarios',0.00,1,0,NULL),(23,'Gratis','2','Delivery Van Sorteo Tec','Una furgoneta de entrega básica con el logo de Sorteo Tec',0.00,1,0,NULL),(24,'Gratis','3','Gorra Sorteo Tec','Una gorra básica con el logo de Sorteo Tec',0.00,1,0,NULL),(25,'Gratis','4','Camiseta Sorteo Tec','Una camiseta básica con el logo de Sorteo Tec',0.00,1,0,NULL);
+INSERT INTO `articulos` VALUES (1,'Dinero','Paquete de Gemas Pequeño','Un paquete pequeño de gemas',50.00,1,0,5),(2,'Dinero','Paquete de Gemas Mediano','Un paquete mediano de gemas',100.00,1,0,5),(3,'Dinero','Paquete de Gemas Grande','Un paquete grande de gemas',200.00,1,0,5),(4,'Dinero','Paquete de Gemas Pequeño','Un paquete pequeño de gemas',50.00,1,0,5),(5,'Dinero','Paquete de Gemas Mediano','Un paquete mediano de gemas',100.00,1,0,5),(6,'Dinero','Paquete de Gemas Grande','Un paquete grande de gemas',200.00,1,0,5),(7,'Dinero','Caja de Botín Bronce','Una caja de botín de nivel bronce',100.00,2,0,6),(8,'Dinero','Caja de Botín Plata','Una caja de botín de nivel plata',200.00,3,0,6),(9,'Dinero','Caja de Botín Oro','Una caja de botín de nivel oro',300.00,4,0,6),(10,'Gratis','Camiseta Sorteo Tec','Una camiseta azul con el logo de Sorteo Tec',0.00,1,0,4),(11,'Gemas','Marco Futurista','Un marco con diseño futurista para tu perfil',40.00,3,0,1),(12,'Gemas','Moto Veloz','Una moto rápida para moverte con estilo',70.00,3,0,2),(13,'Gemas','Casco Espacial','Un casco con diseño de astronauta',35.00,3,0,3),(14,'Gemas','Armadura de Batalla','Una armadura inspirada en guerreros futuristas',80.00,3,0,4),(15,'Gemas','Sombrero de Vaquero','Un sombrero clásico del oeste',20.00,2,0,3),(16,'Gemas','Marco de Lujo','Un marco decorado con joyas y oro',0.00,4,1,1),(17,'Gemas','Coche Clásico','Un elegante coche clásico',0.00,4,1,2),(18,'Gemas','Visera Cibernética','Una visera con tecnología del futuro',0.00,3,1,3),(19,'Gemas','Capa de Superhéroe','Una capa digna de un superhéroe',0.00,3,1,4),(20,'Gemas','Antifaz Misterioso','Un antifaz para ocultar tu identidad',0.00,2,1,3),(21,'Gemas','Supercar Legendario','El modelo más exclusivo y rápido, con diseño futurista',0.00,4,1,2),(22,'Gratis','Marco Estándar Sorteo Tec','Un marco estandarizado para todos los usuarios',0.00,1,0,1),(23,'Gratis','Delivery Van Sorteo Tec','Una furgoneta de entrega básica con el logo de Sorteo Tec',0.00,1,0,2),(24,'Gratis','Gorra Sorteo Tec','Una gorra básica con el logo de Sorteo Tec',0.00,1,0,3),(25,'Gratis','Camiseta Sorteo Tec','Una camiseta básica con el logo de Sorteo Tec',0.00,1,0,4);
 /*!40000 ALTER TABLE `articulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,6 +155,7 @@ CREATE TABLE `logjuego` (
   `TiempoInicio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `DuracionJuego` bigint DEFAULT NULL,
   `Puntuacion` int DEFAULT NULL,
+  `GemasGanadas` int DEFAULT '0',
   PRIMARY KEY (`idlogJuego`),
   KEY `IdUsuario` (`IdUsuario`),
   CONSTRAINT `logjuego_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`IdUsuario`)
@@ -365,4 +365,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-15 14:24:58
+-- Dump completed on 2023-11-15 19:08:25
