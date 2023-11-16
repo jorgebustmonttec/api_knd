@@ -83,3 +83,26 @@ exports.checkAdminStatus = (req, res) => {
       res.json({ Administrador: result[0].Administrador });
   });
 };
+
+exports.authenticateUsuario = (req, res) => {
+  const { Correo, Password } = req.body;
+  const sql = "SELECT IdUsuario, PasswordUsuario, Administrador FROM usuarios WHERE CorreoUsuario = ?";
+
+  db.query(sql, [Correo], (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      if (results.length === 0) {
+          return res.status(401).json({ message: 'Authentication failed.' });
+      }
+
+      const user = results[0];
+      // TODO: Compare hashed password if you store hashed passwords
+      if (user.PasswordUsuario === Password) {
+          // Return some user details (avoid sending sensitive information)
+          res.json({ userId: user.IdUsuario, isAdmin: user.Administrador });
+      } else {
+          res.status(401).json({ message: 'Authentication failed.' });
+      }
+  });
+};

@@ -227,5 +227,31 @@ router.get('/:id', usuarioController.getUsuarioById);
  */
 router.get('/:id/admin', usuarioController.checkAdminStatus);
 
+/**
+ * @swagger
+ * /usuarios/login:
+ *   post:
+ *     summary: Authenticate a usuario
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               Correo:
+ *                 type: string
+ *                 description: The email of the usuario.
+ *               Password:
+ *                 type: string
+ *                 description: The password of the usuario.
+ *     responses:
+ *       200:
+ *         description: Authentication successful.
+ *       401:
+ *         description: Authentication failed.
+ */
+router.post('/login', usuarioController.authenticateUsuario);
+
 
 module.exports = router;
