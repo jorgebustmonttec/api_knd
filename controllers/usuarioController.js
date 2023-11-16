@@ -106,3 +106,34 @@ exports.authenticateUsuario = (req, res) => {
       }
   });
 };
+
+
+// ... other methods and imports
+
+// Method to check if an email exists in the database
+exports.checkEmailExists = (req, res) => {
+  const email = req.query.email;
+  const sql = "SELECT COUNT(*) AS count FROM usuarios WHERE CorreoUsuario = ?";
+  
+  db.query(sql, [email], (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.json({ exists: result[0].count > 0 });
+  });
+};
+
+// Method to check if a username exists in the database
+exports.checkUsernameExists = (req, res) => {
+  const username = req.query.username;
+  const sql = "SELECT COUNT(*) AS count FROM usuarios WHERE UsernameUsuario = ?";
+  
+  db.query(sql, [username], (err, result) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.json({ exists: result[0].count > 0 });
+  });
+};
+
+// ... rest of the file

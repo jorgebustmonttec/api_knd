@@ -253,5 +253,65 @@ router.get('/:id/admin', usuarioController.checkAdminStatus);
  */
 router.post('/login', usuarioController.authenticateUsuario);
 
+/**
+ * @swagger
+ * /usuarios/check-email:
+ *   get:
+ *     summary: Check if an email exists
+ *     description: Check if a given email is already registered in the database.
+ *     parameters:
+ *       - in: query
+ *         name: email
+ *         required: true
+ *         description: The email to check.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns whether the email exists.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 exists:
+ *                   type: boolean
+ *                   description: Indicates whether the email exists.
+ *       500:
+ *         description: Server error.
+ */
+router.get('/check-email', usuarioController.checkEmailExists);
+
+
+/**
+ * @swagger
+ * /usuarios/check-username:
+ *   get:
+ *     summary: Check if a username exists
+ *     description: Check if a given username is already registered in the database.
+ *     parameters:
+ *       - in: query
+ *         name: username
+ *         required: true
+ *         description: The username to check.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns whether the username exists.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 exists:
+ *                   type: boolean
+ *                   description: Indicates whether the username exists.
+ *       500:
+ *         description: Server error.
+ */
+router.get('/check-username', usuarioController.checkUsernameExists);
+
+
 
 module.exports = router;
