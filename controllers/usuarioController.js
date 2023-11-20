@@ -108,8 +108,6 @@ exports.authenticateUsuario = (req, res) => {
 };
 
 
-// ... other methods and imports
-
 // Method to check if an email exists in the database
 exports.checkEmailExists = (req, res) => {
   const email = req.query.email;
@@ -136,4 +134,24 @@ exports.checkUsernameExists = (req, res) => {
   });
 };
 
-// ... rest of the file
+// In usuarioController.js
+
+exports.getUserGenders = (req, res) => {
+    const sql = "SELECT GeneroUsuario, COUNT(*) AS count FROM usuarios GROUP BY GeneroUsuario";
+    db.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        // Convert the array of results into an object with gender keys and counts
+        const genderCount = results.reduce((acc, { GeneroUsuario, count }) => {
+            acc[GeneroUsuario] = count;
+            return acc;
+        }, {});
+        // Include "Prefiero No Decir" count if not present
+        if (!genderCount["Prefiero No Decir"]) {
+            genderCount["Prefiero No Decir"] = 0;
+        }
+        res.json(genderCount);
+    });
+};
+

@@ -84,6 +84,29 @@ router.get('/', usuarioController.getAllUsuarios);
 
 /**
  * @swagger
+ * /usuarios/genders:
+ *   get:
+ *     summary: Get count of all genders
+ *     description: Retrieve a count of all genders from the users.
+ *     responses:
+ *       200:
+ *         description: A count of each gender from the users.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               additionalProperties:
+ *                 type: integer
+ *               example: { "Masculino": 10, "Femenino": 15, "Otro": 2, "Prefiero No Decir": 5 }
+ *       500:
+ *         description: Server error.
+ */
+
+router.get('/genders', usuarioController.getUserGenders);
+
+
+/**
+ * @swagger
  * /usuarios/register:
  *   post:
  *     summary: Register a new usuario
@@ -311,7 +334,6 @@ router.get('/check-email', usuarioController.checkEmailExists);
  *         description: Server error.
  */
 router.get('/check-username', usuarioController.checkUsernameExists);
-
 
 
 module.exports = router;
