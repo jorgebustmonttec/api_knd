@@ -205,3 +205,98 @@ exports.getUserCreationDates = (req, res) => {
         res.json(results.map(user => user.FechaCreacionUsuario));
     });
 };
+
+
+exports.getUserCreationDatesByYear = (req, res) => {
+    // SQL query to select the year part from the date and the date itself, then order by these two fields
+    const sql = `
+        SELECT 
+            YEAR(FechaCreacionUsuario) AS Year, 
+            FechaCreacionUsuario 
+        FROM 
+            usuarios 
+        ORDER BY 
+            Year DESC, 
+            FechaCreacionUsuario ASC`;
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        // Group results by year
+        const groupedByYear = results.reduce((acc, current) => {
+            const year = current.Year.toString();
+            if (!acc[year]) {
+                acc[year] = [];
+            }
+            acc[year].push(current.FechaCreacionUsuario);
+            return acc;
+        }, {});
+
+        res.json(groupedByYear);
+    });
+};
+
+
+
+exports.getUserCreationDatesByDay = (req, res) => {
+    // SQL query to select the count of users created on each date
+    const sql = `
+        SELECT 
+            DATE(FechaCreacionUsuario) AS CreationDate, 
+            COUNT(*) AS UserCount
+        FROM 
+            usuarios 
+        GROUP BY 
+            CreationDate
+        ORDER BY 
+            CreationDate DESC`;
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        // Convert the array of results into an object grouped by year with counts for each day
+        const groupedByDate = results.reduce((acc, current) => {
+            // Check if current.CreationDate is not null or undefined
+            if (current.CreationDate) {
+                const date = new Date(current.CreationDate);
+                const year = date.getFullYear().toString();
+                const dateString = date.toISOString().split('T')[0]; // Format date as 'YYYY-MM-DD'
+                
+                if (!acc[year]) {
+                    acc[year] = {};
+                }
+                acc[year][dateString] = current.UserCount;
+            }
+            return acc;
+        }, {});
+
+        res.json(groupedByDate);
+    });
+};
+
+exports.getUserGems = (req, res) => {
+    const sql = "SELECT u.IdUsuario, (COALESCE(SUM(tdr.CantidadGemasOtorgadas), 0) + COALESCE(SUM(lj.GemasGanadas), 0) - COALESCE(SUM(tg.CantidadGemas), 0)) AS TotalGem FROM usuarios u LEFT JOIN transaccionesdineroreal tdr ON u.IdUsuario = tdr.idUsuario AND tdr.Tipo LEFT JOIN logjuego lj ON u.IdUsuario = lj.IdUsuario LEFT JOIN transaccionesgemas tg ON u.IdUsuario = tg.idUsuario AND tg.Tipo GROUP BY u.IdUsuario;";
+    db.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
+    });
+};
+
+
+exports.getGemsById = (req, res) => {
+    const userId = req.params.id;
+    const sql = "SELECT (COALESCE(SUM(tdr.CantidadGemasOtorgadas), 0) + COALESCE(SUM(lj.GemasGanadas), 0) - COALESCE(SUM(tg.CantidadGemas), 0)) AS TotalGem FROM usuarios u LEFT JOIN transaccionesdineroreal tdr ON u.IdUsuario = tdr.idUsuario AND tdr.Tipo LEFT JOIN logjuego lj ON u.IdUsuario = lj.IdUsuario LEFT JOIN transaccionesgemas tg ON u.IdUsuario = tg.idUsuario AND tg.Tipo WHERE u.IdUsuario = 1 GROUP BY u.IdUsuario;";
+    db.query(sql, [userId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'Usuario not found.' });
+        }
+        res.json(results[0]);
+    });
+};

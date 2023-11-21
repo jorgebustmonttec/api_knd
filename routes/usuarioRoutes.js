@@ -150,6 +150,75 @@ router.get('/creation-dates', usuarioController.getUserCreationDates);
 
 /**
  * @swagger
+ * /usuarios/creation-dates-by-year:
+ *   get:
+ *     summary: Get user creation dates grouped by year
+ *     description: Retrieve a list of user creation dates, grouped by year.
+ *     responses:
+ *       200:
+ *         description: A JSON object with years as keys and arrays of creation dates as values.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               additionalProperties:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: date-time
+ *               example: {
+ *                 "2023": ["2023-01-01T00:00:00Z", "2023-01-02T00:00:00Z"],
+ *                 "2022": ["2022-01-01T00:00:00Z", "2022-01-02T00:00:00Z"],
+ *                 "2021": ["2021-01-01T00:00:00Z", "2021-01-02T00:00:00Z"]
+ *               }
+ *       500:
+ *         description: Server error.
+ */
+router.get('/creation-dates-by-year', usuarioController.getUserCreationDatesByYear);
+
+/**
+ * @swagger
+ * /usuarios/creation-dates-count-per-day:
+ *   get:
+ *     summary: Get count of user creation per day grouped by year
+ *     description: Retrieve a count of user creations for each specific day, grouped by year.
+ *     responses:
+ *       200:
+ *         description: A JSON object with years as keys and objects as values, where each key is a date and value is the count of user creations for that date.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               additionalProperties:
+ *                 type: object
+ *                 additionalProperties:
+ *                   type: integer
+ *               example: {
+ *                 "2023": {
+ *                   "2023-01-01": 10,
+ *                   "2023-01-02": 7
+ *                 },
+ *                 "2022": {
+ *                   "2022-01-01": 5,
+ *                   "2022-01-02": 3
+ *                 },
+ *                 "2021": {
+ *                   "2021-01-01": 8,
+ *                   "2021-01-02": 4
+ *                 }
+ *               }
+ *       500:
+ *         description: Server error.
+ */
+router.get('/creation-dates-count-per-day', usuarioController.getUserCreationDatesByDay);
+
+
+
+
+
+
+/**
+ * @swagger
  * /usuarios/register:
  *   post:
  *     summary: Register a new usuario
@@ -167,22 +236,16 @@ router.get('/creation-dates', usuarioController.getUserCreationDates);
  */
 router.post('/register', usuarioController.registerUsuario);
 
+
 /**
  * @swagger
- * /usuarios/{id}/articulos:
+ * /usuarios/gems:
  *   get:
- *     summary: Retrieve articles owned by a specific usuario
- *     description: Retrieve a list of article IDs that a specific usuario owns.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the usuario to get articles for.
- *         schema:
- *           type: integer
+ *     summary: Get gem totals for all usuarios
+ *     description: Retrieve the total gems for each usuario.
  *     responses:
  *       200:
- *         description: A list of articles owned by the usuario.
+ *         description: An array of users with their total gems.
  *         content:
  *           application/json:
  *             schema:
@@ -190,13 +253,17 @@ router.post('/register', usuarioController.registerUsuario);
  *               items:
  *                 type: object
  *                 properties:
- *                   IdArticulo:
+ *                   IdUsuario:
  *                     type: integer
- *                     description: The unique identifier of the article.
- *       404:
- *         description: Usuario not found.
+ *                     description: Unique identifier of the usuario.
+ *                   TotalGem:
+ *                     type: integer
+ *                     description: Total gems of the usuario.
+ *       500:
+ *         description: Server error.
  */
-router.get('/:id/articulos', usuarioController.getUsuarioArticulos);
+router.get('/gems', usuarioController.getUserGems);
+
 
 /**
  * @swagger
@@ -240,30 +307,7 @@ router.get('/:id/articulos', usuarioController.getUsuarioArticulos);
 router.get('/:id/inventario', usuarioController.getUsuarioInventario);
 
 
-/**
- * @swagger
- * /usuarios/{id}:
- *   get:
- *     summary: Retrieve a specific usuario by ID
- *     description: Retrieve details of a specific usuario by their unique identifier.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the usuario to retrieve.
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Detailed information about the usuario.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Usuario'
- *       404:
- *         description: Usuario not found.
- */
-router.get('/:id', usuarioController.getUsuarioById);
+
 
 /**
  * @swagger
@@ -377,6 +421,66 @@ router.get('/check-email', usuarioController.checkEmailExists);
  *         description: Server error.
  */
 router.get('/check-username', usuarioController.checkUsernameExists);
+
+/**
+ * @swagger
+ * /usuarios/{id}/gems:
+ *   get:
+ *     summary: Get gems of a specific usuario
+ *     description: Retrieve the gems of a specific usuario.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to get the gems for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: The gem count of the usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: integer
+ *       404:
+ *         description: Usuario not found.
+ *       500:
+ *         description: Server error.
+ */
+
+ 
+router.get('/:id/gems', usuarioController.getGemsById);
+
+
+
+
+/**
+ * @swagger
+ * /usuarios/{id}:
+ *   get:
+ *     summary: Retrieve a specific usuario by ID
+ *     description: Retrieve details of a specific usuario by their unique identifier.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to retrieve.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Detailed information about the usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Usuario'
+ *       404:
+ *         description: Usuario not found.
+ */
+router.get('/:id', usuarioController.getUsuarioById);
+
+
+
 
 
 module.exports = router;
