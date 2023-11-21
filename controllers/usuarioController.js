@@ -155,3 +155,53 @@ exports.getUserGenders = (req, res) => {
     });
 };
 
+exports.getUserAgeRanges = (req, res) => {
+    const sql = `
+    SELECT AgeRange, COUNT(*) AS Count
+    FROM (
+        SELECT CASE
+            WHEN TIMESTAMPDIFF(YEAR, FechaNacimientoUsuario, CURDATE()) BETWEEN 18 AND 24 THEN '18-24'
+            WHEN TIMESTAMPDIFF(YEAR, FechaNacimientoUsuario, CURDATE()) BETWEEN 25 AND 34 THEN '25-34'
+            WHEN TIMESTAMPDIFF(YEAR, FechaNacimientoUsuario, CURDATE()) BETWEEN 35 AND 44 THEN '35-44'
+            WHEN TIMESTAMPDIFF(YEAR, FechaNacimientoUsuario, CURDATE()) BETWEEN 45 AND 54 THEN '45-54'
+            WHEN TIMESTAMPDIFF(YEAR, FechaNacimientoUsuario, CURDATE()) BETWEEN 55 AND 64 THEN '55-64'
+            WHEN TIMESTAMPDIFF(YEAR, FechaNacimientoUsuario, CURDATE()) >= 65 THEN '65+'
+            ELSE 'Under 18'
+        END AS AgeRange
+        FROM usuarios
+    ) AS AgeRanges
+    GROUP BY AgeRange
+    ORDER BY CASE AgeRange
+        WHEN 'Under 18' THEN 1
+        WHEN '18-24' THEN 2
+        WHEN '25-34' THEN 3
+        WHEN '35-44' THEN 4
+        WHEN '45-54' THEN 5
+        WHEN '55-64' THEN 6
+        WHEN '65+' THEN 7
+        ELSE 8
+    END
+`;
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        // Convert the array of results into an object with age range keys and counts
+        const ageRangesCount = results.reduce((acc, { AgeRange, Count }) => {
+            acc[AgeRange] = Count;
+            return acc;
+        }, {});
+        res.json(ageRangesCount);
+    });
+};
+
+exports.getUserCreationDates = (req, res) => {
+    const sql = "SELECT FechaCreacionUsuario FROM usuarios";
+    db.query(sql, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results.map(user => user.FechaCreacionUsuario));
+    });
+};

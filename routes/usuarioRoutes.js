@@ -104,6 +104,49 @@ router.get('/', usuarioController.getAllUsuarios);
 
 router.get('/genders', usuarioController.getUserGenders);
 
+/**
+ * @swagger
+ * /usuarios/age-ranges:
+ *   get:
+ *     summary: Get count of users within age ranges
+ *     description: Retrieve a count of users within defined age ranges.
+ *     responses:
+ *       200:
+ *         description: A count of users within each age range.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               additionalProperties:
+ *                 type: integer
+ *               example: { "18-24": 5, "25-34": 10, "35-44": 8, "45-54": 12, "55-64": 7, "65+": 4 }
+ *       500:
+ *         description: Server error.
+ */
+
+router.get('/age-ranges', usuarioController.getUserAgeRanges);
+
+/**
+ * @swagger
+ * /usuarios/creation-dates:
+ *   get:
+ *     summary: Get creation dates of all users
+ *     description: Retrieve a list of creation dates for all users.
+ *     responses:
+ *       200:
+ *         description: A list of creation dates for users.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: string
+ *                 format: date-time
+ *               example: ["2023-01-01T00:00:00Z", "2023-01-02T00:00:00Z"]
+ *       500:
+ *         description: Server error.
+ */
+router.get('/creation-dates', usuarioController.getUserCreationDates);
 
 /**
  * @swagger
