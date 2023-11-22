@@ -217,6 +217,63 @@ router.get('/creation-dates-count-per-day', usuarioController.getUserCreationDat
 
 
 
+
+/**
+ * @swagger
+ * /logjuego:
+ *   post:
+ *     summary: Create a new logjuego entry
+ *     description: Add a new entry to the logjuego table with the time the game started, duration, and gems won.
+ *     tags:
+ *       - LogJuego
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - idUsuario
+ *               - GemasGanadas
+ *               - DuracionJuego
+ *             properties:
+ *               idUsuario:
+ *                 type: integer
+ *                 description: ID of the user
+ *               GemasGanadas:
+ *                 type: integer
+ *                 description: Number of gems won by the user
+ *               DuracionJuego:
+ *                 type: integer
+ *                 description: Duration of the game in seconds
+ *             example:
+ *               idUsuario: 1
+ *               GemasGanadas: 100
+ *               DuracionJuego: 360
+ *     responses:
+ *       201:
+ *         description: LogJuego entry created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: LogJuego entry created successfully
+ *                 id:
+ *                   type: integer
+ *                   example: 42
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
+ */
+router.post('/logjuego', usuarioController.createLogJuegoEntry);
+
+
+
+
 /**
  * @swagger
  * /usuarios/register:

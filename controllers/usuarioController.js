@@ -300,3 +300,22 @@ exports.getGemsById = (req, res) => {
         res.json(results[0]);
     });
 };
+
+exports.createLogJuegoEntry = (req, res) => {
+    const { idUsuario, GemasGanadas, DuracionJuego } = req.body;
+
+    // Calculate TiempoInicio by subtracting DuracionJuego from the current time
+    const TiempoInicio = new Date(new Date().getTime() - DuracionJuego * 1000);
+
+    const sql = `
+        INSERT INTO logjuego (IdUsuario, TiempoInicio, DuracionJuego, Puntuacion, GemasGanadas)
+        VALUES (?, ?, ?, ?, ?)
+    `;
+
+    db.query(sql, [idUsuario, TiempoInicio, DuracionJuego, DuracionJuego, GemasGanadas], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(201).json({ message: 'LogJuego entry created successfully', id: result.insertId });
+    });
+};
