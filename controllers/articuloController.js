@@ -2,6 +2,7 @@
 
 const Articulo = require('../models/articulo');
 
+
 exports.getAllArticulos = (req, res) => {
     Articulo.getAll((err, results) => {
         if (err) {
