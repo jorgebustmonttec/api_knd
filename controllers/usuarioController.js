@@ -224,14 +224,55 @@ exports.getUserGems = (req, res) => {
 
 exports.getGemsById = (req, res) => {
     const userId = req.params.id;
-    const sql = "SELECT (COALESCE(SUM(tdr.CantidadGemasOtorgadas), 0) + COALESCE(SUM(lj.GemasGanadas), 0) - COALESCE(SUM(tg.CantidadGemas), 0)) AS TotalGem FROM usuarios u LEFT JOIN transaccionesdineroreal tdr ON u.IdUsuario = tdr.idUsuario AND tdr.Tipo LEFT JOIN logjuego lj ON u.IdUsuario = lj.IdUsuario LEFT JOIN transaccionesgemas tg ON u.IdUsuario = tg.idUsuario AND tg.Tipo WHERE u.IdUsuario = 1 GROUP BY u.IdUsuario;";
-    db.query(sql, [userId], (err, results) => {
+
+    // First, check if the user exists in the usuarios table
+    const userCheckSql = "SELECT COUNT(*) AS count FROM usuarios WHERE IdUsuario = ?";
+    db.query(userCheckSql, [userId], (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        if (results.length === 0) {
-            return res.status(404).json({ message: 'Usuario not found.' });
+        if (result[0].count === 0) {
+            return res.status(404).json({ message: 'User does not exist.' });
         }
-        res.json(results[0]);
+
+        // If the user exists, calculate the total gems
+        const gemsSql = `
+            SELECT 
+                SUM(gemas) AS Total_Gemas
+            FROM (
+                SELECT 
+                    idUsuario, 
+                    gemasGanadas AS gemas
+                FROM logjuego
+                WHERE idUsuario = ?
+
+                UNION ALL
+
+                SELECT 
+                    idUsuario, 
+                    cantidadgemasotorgadas AS gemas
+                FROM transaccionesdineroreal
+                WHERE idUsuario = ?
+
+                UNION ALL
+
+                SELECT 
+                    idUsuario, 
+                    -cantidadgemas AS gemas
+                FROM transaccionesgemas
+                WHERE idUsuario = ?
+            ) AS combined
+        `;
+        
+        db.query(gemsSql, [userId, userId, userId], (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            if (result.length === 0 || result[0].Total_Gemas === null) {
+                return res.json({ Total_Gemas: 0 });
+            }
+            res.json({ Total_Gemas: result[0].Total_Gemas });
+        });
     });
 };
+
