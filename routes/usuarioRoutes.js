@@ -2,6 +2,53 @@ const express = require('express');
 const usuarioController = require('../controllers/usuarioController');
 const router = express.Router();
 
+
+
+
+// usuariosRoutes.js
+
+// ... other routes ...
+
+/**
+ * @swagger
+ * /usuarios/adminstatus:
+ *   get:
+ *     summary: Get user ID and admin status by email
+ *     parameters:
+ *       - in: query
+ *         name: email
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The user's email
+ *     responses:
+ *       200:
+ *         description: User ID and admin status retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 IdUsuario:
+ *                   type: integer
+ *                   description: The ID of the usuario.
+ *                 Administrador:
+ *                   type: boolean
+ *                   description: Admin status of the usuario.
+ *       404:
+ *         description: User not found.
+ *       500:
+ *         description: Server error.
+ */
+router.get('/adminstatus', usuarioController.getUserByIdAndAdminStatus);
+
+
+
+
+
+
+
+
 /**
  * @swagger
  * components:
