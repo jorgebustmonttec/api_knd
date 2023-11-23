@@ -10,7 +10,7 @@ const router = express.Router();
  *   - name: LogJuego
  *     description: Operations about log juego
  *
- * /logjuego:
+ * /logJuego/addLog:
  *   post:
  *     tags: [LogJuego]
  *     summary: Create a log juego entry
@@ -52,6 +52,54 @@ const router = express.Router();
  *         description: Server error.
  */
 
-router.post('/', logJuegoController.addLogJuegoEntry);
+router.post('/addLog', logJuegoController.addLogJuegoEntry);
+
+
+
+/**
+ * @swagger
+ * tags:
+ *   - name: LogJuego
+ *     description: Operations about log juego
+ * 
+ * /logJuego/all:
+ *   get:
+ *     tags: [LogJuego]
+ *     summary: Retrieve all log entries
+ *     description: Fetches all entries from the logjuego table which records user game logs.
+ *     responses:
+ *       200:
+ *         description: An array of log entries.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdUsuario:
+ *                     type: integer
+ *                     description: The ID of the user.
+ *                   idlogJuego:
+ *                     type: integer
+ *                     description: The log entry's unique ID.
+ *                   TiempoInicio:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The start time of the game session.
+ *                   DuracionJuego:
+ *                     type: integer
+ *                     description: The duration of the game session.
+ *                   Puntuacion:
+ *                     type: integer
+ *                     description: The score achieved in the game session.
+ *                   GemasGanadas:
+ *                     type: integer
+ *                     description: The number of gems won in the game session.
+ *       500:
+ *         description: Error occurred while fetching the logs.
+ */
+
+router.get('/all', logJuegoController.checkLogs);
 
 module.exports = router;
