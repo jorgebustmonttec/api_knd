@@ -4,6 +4,8 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const articuloRoutes = require('./routes/articuloRoutes');
 const logJuegoRoutes = require('./routes/logJuegoRoutes');
+const transaccionesRoutes = require('./routes/transaccionesRoutes');
+
 
 const app = express();
 const port = 3000;
@@ -42,6 +44,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/usuarios', usuarioRoutes);
 app.use('/articulos', articuloRoutes);
 app.use('/logJuego', logJuegoRoutes);
+app.use('/transacciones', transaccionesRoutes);
+
+
 
 app.get('/', (req, res) => res.send('Welcome to the Sample API'));
 

@@ -1,11 +1,18 @@
+// routes/logJuegoRoutes.js
+
 const express = require('express');
 const logJuegoController = require('../controllers/logJuegoController');
 const router = express.Router();
 
 /**
  * @swagger
+ * tags:
+ *   - name: LogJuego
+ *     description: Operations about log juego
+ *
  * /logjuego:
  *   post:
+ *     tags: [LogJuego]
  *     summary: Create a log juego entry
  *     description: Add a new entry to the log juego table.
  *     requestBody:
@@ -44,6 +51,7 @@ const router = express.Router();
  *       500:
  *         description: Server error.
  */
+
 router.post('/', logJuegoController.addLogJuegoEntry);
 
 module.exports = router;

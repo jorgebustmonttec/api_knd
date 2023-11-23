@@ -1,3 +1,5 @@
+// controllers/logJuegoController.js
+
 const db = require('../utils/db'); // Import your database configuration
 
 exports.addLogJuegoEntry = (req, res) => {
