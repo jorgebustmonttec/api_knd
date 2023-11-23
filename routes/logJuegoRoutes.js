@@ -25,6 +25,7 @@ const router = express.Router();
  *               - IdUsuario
  *               - GemsGanadas
  *               - DuracionJuego
+ *               - Puntuacion  # Add Puntuacion as a required property
  *             properties:
  *               IdUsuario:
  *                 type: integer
@@ -35,6 +36,9 @@ const router = express.Router();
  *               DuracionJuego:
  *                 type: integer
  *                 description: The duration of the game in seconds.
+ *               Puntuacion:   # Add Puntuacion property description
+ *                 type: integer
+ *                 description: The points earned in the game.
  *     responses:
  *       201:
  *         description: Log entry created successfully.
@@ -53,6 +57,7 @@ const router = express.Router();
  */
 
 router.post('/addLog', logJuegoController.addLogJuegoEntry);
+
 
 
 

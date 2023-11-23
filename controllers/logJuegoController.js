@@ -3,7 +3,9 @@
 const db = require('../utils/db'); // Import your database configuration
 
 exports.addLogJuegoEntry = (req, res) => {
-    const { IdUsuario, GemsGanadas, DuracionJuego } = req.body; // Get variables from request body
+    // Include Puntuacion in the destructured variables
+    const { IdUsuario, GemsGanadas, DuracionJuego, Puntuacion } = req.body;
+
     const TiempoInicio = new Date(Date.now() - DuracionJuego * 1000).toISOString().slice(0, 19).replace('T', ' ');
 
     const sql = `
@@ -11,7 +13,8 @@ exports.addLogJuegoEntry = (req, res) => {
         VALUES (?, ?, ?, ?, ?)
     `;
     
-    db.query(sql, [IdUsuario, TiempoInicio, DuracionJuego, DuracionJuego, GemsGanadas], (err, result) => {
+    // Update the db.query to use the new Puntuacion parameter
+    db.query(sql, [IdUsuario, TiempoInicio, DuracionJuego, Puntuacion, GemsGanadas], (err, result) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
