@@ -7,9 +7,8 @@ const router = express.Router();
 /**
  * @swagger
  * tags:
- *   - name: LogJuego
- *     description: Operations about log juego
- * 
+ *   - name: Transacciones
+ *     description: Operations about transactions
  * /transacciones/regalarGemas:
  *   post:
  *     tags: [Transacciones]
@@ -48,6 +47,45 @@ const router = express.Router();
  *         description: Server error.
  */
 router.post('/regalarGemas', transaccionesController.addTransaccionDineroReal);
+
+
+/**
+ * @swagger
+ * 
+ * 
+ * /transacciones/compra:
+ *   post:
+ *     tags: [Transacciones]
+ *     summary: Add a compra transaction
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - idUsuario
+ *               - idArticulo
+ *               - detalle
+ *             properties:
+ *               idUsuario:
+ *                 type: integer
+ *                 description: The user ID for whom the transaction is made.
+ *               idArticulo:
+ *                 type: integer
+ *                 description: The article ID being purchased.
+ *               detalle:
+ *                 type: string
+ *                 description: Details about the transaction.
+ *     responses:
+ *       201:
+ *         description: Transaction added successfully.
+ *       404:
+ *         description: Article not found.
+ *       500:
+ *         description: Server error.
+ */
+router.post('/compra', transaccionesController.addCompraTransaction);
 
 
 module.exports = router;

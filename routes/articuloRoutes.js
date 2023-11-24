@@ -1,3 +1,10 @@
+
+
+const express = require('express');
+const articuloController = require('../controllers/articuloController');
+const router = express.Router();
+
+
 /**
  * @swagger
  * components:
@@ -65,13 +72,116 @@
  *               items:
  *                 $ref: '#/components/schemas/Articulo'
  */
-
-
-
-const express = require('express');
-const articuloController = require('../controllers/articuloController');
-const router = express.Router();
-
 router.get('/', articuloController.getAllArticulos);
+
+/**
+ * @swagger
+ * /articulos/usuarioArticulos:
+ *   get:
+ *     tags: [Articulos]
+ *     summary: Retrieve a list of all articulos with their associated usuarios
+ *     responses:
+ *       200:
+ *         description: A list of usuario and articulo associations.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdUsuario:
+ *                     type: integer
+ *                     description: The unique identifier for the usuario.
+ *                   IdArticulo:
+ *                     type: integer
+ *                     description: The unique identifier for the articulo.
+ *                 required:
+ *                   - IdUsuario
+ *                   - IdArticulo
+ *                 example:
+ *                   IdUsuario: 123
+ *                   IdArticulo: 456
+ */
+router.get('/usuarioArticulos', articuloController.getAllUsuarioArticulo);
+
+/**
+ * @swagger
+ * /articulos/usuarioArticulos/{id}:
+ *   get:
+ *     tags: [Articulos]
+ *     summary: Retrieve a list of articulos owned by a specific usuario
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to get the articulos for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: A list of articulos owned by the specified usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdUsuario:
+ *                     type: integer
+ *                     description: The unique identifier for the usuario.
+ *                   IdArticulo:
+ *                     type: integer
+ *                     description: The unique identifier for the articulo.
+ */
+router.get('/usuarioArticulos/:id', articuloController.getArticulosByUsuario);
+
+
+/**
+ * @swagger
+ * /articulos/usuarioArticulos/add:
+ *   post:
+ *     tags: [Articulos]
+ *     summary: Add a new articulo for a specific usuario
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               IdUsuario:
+ *                 type: integer
+ *                 description: The unique identifier for the usuario.
+ *               IdArticulo:
+ *                 type: integer
+ *                 description: The unique identifier for the articulo.
+ *             required:
+ *               - IdUsuario
+ *               - IdArticulo
+ *     responses:
+ *       201:
+ *         description: Entry created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Entry added successfully
+ *                 IdUsuario:
+ *                   type: integer
+ *                   example: 1
+ *                 IdArticulo:
+ *                   type: integer
+ *                   example: 22
+ *       500:
+ *         description: Server error.
+ * 
+ */
+router.post('/usuarioArticulos/add', articuloController.addUsuarioArticulo);
+
 
 module.exports = router;
