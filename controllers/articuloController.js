@@ -68,6 +68,25 @@ exports.addUsuarioArticulo = (req, res) => {
         });
     });
 };
+exports.getArticlePrice = (req, res) => {
+    const { id } = req.params; // Assume you pass the article ID in the route parameter
+
+    const sql = 'SELECT PrecioArticulo FROM articulos WHERE IdArticulo = ?'; // SQL query to fetch the price of a specific article
+
+    db.query(sql, [id], (err, results) => {
+        if (err) {
+            // Handle errors, e.g., return a server error response
+            return res.status(500).json({ error: err.message });
+        }
+        if (results.length === 0) {
+            // No results found for the given article ID
+            return res.status(404).json({ message: 'Article not found' });
+        }
+        // Return only the price as JSON
+        res.json({ PrecioArticulo: results[0].PrecioArticulo });
+    });
+};
+
 
 
 

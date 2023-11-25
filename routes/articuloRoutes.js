@@ -183,5 +183,37 @@ router.get('/usuarioArticulos/:id', articuloController.getArticulosByUsuario);
  */
 router.post('/usuarioArticulos/add', articuloController.addUsuarioArticulo);
 
+/**
+ * @swagger
+ * /articulos/{id}/price:
+ *   get:
+ *     tags: [Articulos]
+ *     summary: Get the price of a specific articulo
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the articulo to get the price for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: The price of the articulo.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 PrecioArticulo:
+ *                   type: number
+ *                   format: double
+ *                   example: 199.99
+ *       404:
+ *         description: Article not found.
+ *       500:
+ *         description: Server error.
+ */
+router.get('/:id/price', articuloController.getArticlePrice);
+
 
 module.exports = router;
