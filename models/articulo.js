@@ -13,4 +13,8 @@ class Articulo {
     // Add more methods for CRUD operations as needed
 }
 
+
+
+
+
 module.exports = Articulo;
