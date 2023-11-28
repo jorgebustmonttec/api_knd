@@ -13,8 +13,35 @@ exports.getAllArticulos = (req, res) => {
     });
 };
 
+
 exports.getAllUsuarioArticulo = (req, res) => {
     const sql = 'SELECT * FROM articulousuario'; // SQL query to fetch all articles
+    db.query(sql, (err, results) => {
+        if (err) {
+            // Handle errors, e.g., return a server error response
+            return res.status(500).json({ error: err.message });
+        }
+        // Return the results as JSON
+        res.json(results);
+    });
+};
+
+
+
+exports.getCarrosIdName= (req, res) => {
+    const sql = 'SELECT IdArticulo, NombreArticulo FROM articulos WHERE TipoArticuloID=2'; // SQL query to fetch all articles
+    db.query(sql, (err, results) => {
+        if (err) {
+            // Handle errors, e.g., return a server error response
+            return res.status(500).json({ error: err.message });
+        }
+        // Return the results as JSON
+        res.json(results);
+    });
+};
+
+exports.getCarrosId= (req, res) => {
+    const sql = 'SELECT IdArticulo FROM articulos WHERE TipoArticuloID=2'; // SQL query to fetch all articles
     db.query(sql, (err, results) => {
         if (err) {
             // Handle errors, e.g., return a server error response
@@ -38,6 +65,21 @@ exports.getArticulosByUsuario = (req, res) => {
         res.json(results);
     });
 };
+
+exports.getArticulosByUsuarioCarros = (req, res) => {
+    const userId = req.params.id; // Get the user ID from the route parameter
+    const sql = 'SELECT au.idarticulo FROM articulousuario au JOIN articulos a ON au.idarticulo = a.idarticulo WHERE a.TipoArticuloID = 2 AND au.IdUsuario=1 '; // SQL query to fetch articles for a specific user
+
+    db.query(sql, [userId], (err, results) => {
+        if (err) {
+            // Handle errors, e.g., return a server error response
+            return res.status(500).json({ error: err.message });
+        }
+        // Return the results as JSON
+        res.json(results);
+    });
+};
+
 
 
 exports.addUsuarioArticulo = (req, res) => {

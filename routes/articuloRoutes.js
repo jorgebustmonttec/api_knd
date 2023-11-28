@@ -74,6 +74,55 @@ const router = express.Router();
  */
 router.get('/', articuloController.getAllArticulos);
 
+
+/**
+ * @swagger
+ * /articulos/carros:
+ *   get:
+ *     tags: [Articulos]
+ *     summary: Retrieve a list of all IdArticulo with the tag 'carro'
+ *     responses:
+ *       200:
+ *         description: A list of all car article IDs
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdArticulo:
+ *                     type: integer
+ *                     description: The unique identifier for the articulo.
+ */
+router.get('/carros',articuloController.getCarrosId)
+
+
+/**
+ * @swagger
+ * /articulos/carros/name:
+ *   get:
+ *     tags: [Articulos]
+ *     summary: Retrieve a list of all IdArticulo and their names with the tag 'carro'
+ *     responses:
+ *       200:
+ *         description: A list of all car article IDs and names
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdArticulo:
+ *                     type: integer
+ *                     description: The unique identifier for the articulo.
+ *                   NombreArticulo:
+ *                     type: string
+ *                     description: the name for the articulo
+ */
+router.get('/carros/name',articuloController.getCarrosIdName)
+
 /**
  * @swagger
  * /articulos/usuarioArticulos:
@@ -137,6 +186,35 @@ router.get('/usuarioArticulos', articuloController.getAllUsuarioArticulo);
  */
 router.get('/usuarioArticulos/:id', articuloController.getArticulosByUsuario);
 
+
+/**
+ * @swagger
+ * /articulos/usuarioArticulos/{id}/carros:
+ *   get:
+ *     tags: [Articulos]
+ *     summary: Retrieve a list of carro articulos owned by a specific usuario
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to get the articulos for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: A list of car articulos owned by the specified usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdArticulo:
+ *                     type: integer
+ *                     description: The unique identifier for the articulo.
+ */
+router.get('/usuarioArticulos/:id/carros', articuloController.getArticulosByUsuarioCarros)
 
 /**
  * @swagger
