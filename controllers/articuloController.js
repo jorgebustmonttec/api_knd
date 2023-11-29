@@ -111,3 +111,26 @@ exports.getArticlePrice = (req, res) => {
         res.json({ PrecioArticulo: results[0].PrecioArticulo });
     });
 };
+
+
+
+/**
+ * Checks if a user owns a specific article.
+ * @param {object} req - The request object from Express.
+ * @param {object} res - The response object from Express.
+ */
+exports.checkUserArticleOwnership = (req, res) => {
+    const userId = req.params.userId;
+    const articuloId = req.params.articuloId;
+
+    const sql = 'SELECT 1 FROM articulousuario WHERE IdUsuario = ? AND IdArticulo = ?';
+
+    db.query(sql, [userId, articuloId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        const ownsArticle = results.length > 0;
+        res.json({ ownsArticle });
+    });
+};
