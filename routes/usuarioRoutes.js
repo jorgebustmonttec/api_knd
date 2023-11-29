@@ -2,13 +2,6 @@ const express = require('express');
 const usuarioController = require('../controllers/usuarioController');
 const router = express.Router();
 
-
-
-
-// usuariosRoutes.js
-
-// ... other routes ...
-
 /**
  * @swagger
  * /usuarios/adminstatus:

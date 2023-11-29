@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const articuloController = require('../controllers/articuloController');
 const router = express.Router();

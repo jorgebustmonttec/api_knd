@@ -11,8 +11,6 @@ class Usuario {
         callback(null, results);
       });
     }
-  
-    // You can add more methods for different operations, like getById, create, update, delete, etc.
   }
 
   

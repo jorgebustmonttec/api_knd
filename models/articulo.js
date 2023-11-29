@@ -1,6 +1,6 @@
 // models/articulo.js
 
-const db = require('../utils/db'); // Assuming you have a utility file for DB operations
+const db = require('../utils/db'); 
 
 class Articulo {
     static getAll(callback) {
@@ -9,8 +9,6 @@ class Articulo {
             callback(err, results);
         });
     }
-
-    // Add more methods for CRUD operations as needed
 }
 
 

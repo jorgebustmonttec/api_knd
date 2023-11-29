@@ -1,4 +1,3 @@
-
 const express = require('express');
 const inventarioController = require('../controllers/inventarioController');
 const router = express.Router();
@@ -36,8 +35,6 @@ const router = express.Router();
  *       500:
  *         description: Error interno del servidor.
  */
-
-// Express route definition
 router.post('/cambiar-vehiculo', inventarioController.cambiarVehiculo);
 
 

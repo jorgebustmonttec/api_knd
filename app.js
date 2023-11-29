@@ -10,7 +10,7 @@ const inventarioRoutes = require('./routes/inventarioRoutes');
 const app = express();
 const port = 3000;
 
-// Swagger definition
+
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
@@ -25,22 +25,22 @@ const swaggerDefinition = {
   ],
 };
 
-// Options for the swagger docs
+
 const options = {
   swaggerDefinition,
-  // Paths to files containing OpenAPI definitions
+
   apis: ['./routes/*.js'],
 };
 
-// Initialize swagger-jsdoc
+
 const swaggerSpec = swaggerJSDoc(options);
 
 app.use(express.json());
 
-// Serve Swagger documentation
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Use routes
+
 app.use('/usuarios', usuarioRoutes);
 app.use('/articulos', articuloRoutes);
 app.use('/logJuego', logJuegoRoutes);
@@ -49,7 +49,7 @@ app.use('/inventario', inventarioRoutes);
 
 
 
-app.get('/', (req, res) => res.send('Welcome to the Sample API'));
+app.get('/', (req, res) => res.send('Hello World!'));
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
 
