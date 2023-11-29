@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'itesm',
+  password: '352641Dg',
   database: 'crazysorteo_test'
 });
 
