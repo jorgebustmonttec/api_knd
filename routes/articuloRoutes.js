@@ -156,6 +156,52 @@ router.get('/usuarioArticulos', articuloController.getAllUsuarioArticulo);
 
 /**
  * @swagger
+ * /articulos/usuarioArticulos/add:
+ *   post:
+ *     tags: [Articulos]
+ *     summary: Add a new articulo for a specific usuario
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               IdUsuario:
+ *                 type: integer
+ *                 description: The unique identifier for the usuario.
+ *               IdArticulo:
+ *                 type: integer
+ *                 description: The unique identifier for the articulo.
+ *             required:
+ *               - IdUsuario
+ *               - IdArticulo
+ *     responses:
+ *       201:
+ *         description: Entry created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Entry added successfully
+ *                 IdUsuario:
+ *                   type: integer
+ *                   example: 1
+ *                 IdArticulo:
+ *                   type: integer
+ *                   example: 22
+ *       500:
+ *         description: Server error.
+ * 
+ */
+router.post('/usuarioArticulos/add', articuloController.addUsuarioArticulo);
+
+
+/**
+ * @swagger
  * /articulos/usuarioArticulos/{id}:
  *   get:
  *     tags: [Articulos]
@@ -216,50 +262,7 @@ router.get('/usuarioArticulos/:id', articuloController.getArticulosByUsuario);
  */
 router.get('/usuarioArticulos/:id/carros', articuloController.getArticulosByUsuarioCarros)
 
-/**
- * @swagger
- * /articulos/usuarioArticulos/add:
- *   post:
- *     tags: [Articulos]
- *     summary: Add a new articulo for a specific usuario
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               IdUsuario:
- *                 type: integer
- *                 description: The unique identifier for the usuario.
- *               IdArticulo:
- *                 type: integer
- *                 description: The unique identifier for the articulo.
- *             required:
- *               - IdUsuario
- *               - IdArticulo
- *     responses:
- *       201:
- *         description: Entry created successfully.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Entry added successfully
- *                 IdUsuario:
- *                   type: integer
- *                   example: 1
- *                 IdArticulo:
- *                   type: integer
- *                   example: 22
- *       500:
- *         description: Server error.
- * 
- */
-router.post('/usuarioArticulos/add', articuloController.addUsuarioArticulo);
+
 
 /**
  * @swagger
