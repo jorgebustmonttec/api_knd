@@ -3,6 +3,42 @@ const articuloController = require('../controllers/articuloController');
 const router = express.Router();
 
 
+
+/**
+ * @swagger
+ * /articulos/usuario/{userId}/owns/{articuloId}:
+ *   get:
+ *     tags: [Articulos]
+ *     summary: Checks if a user owns a specific article.
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         description: ID of the user.
+ *         schema:
+ *           type: integer
+ *       - in: path
+ *         name: articuloId
+ *         required: true
+ *         description: ID of the article to check ownership for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Ownership status of the article.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 ownsArticle:
+ *                   type: boolean
+ *                   description: Whether the user owns the article or not.
+ *       500:
+ *         description: Server error.
+ */
+router.get('/usuario/:userId/owns/:articuloId', articuloController.checkUserArticleOwnership);
+
 /**
  * @swagger
  * components:

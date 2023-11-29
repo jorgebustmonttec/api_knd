@@ -269,7 +269,7 @@ exports.getGemsById = (req, res) => {
                 return res.status(500).json({ error: err.message });
             }
             if (result.length === 0 || result[0].Total_Gemas === null) {
-                return res.json({ Total_Gemas: 0 });
+                return res.json({ Total_Gemas: "0" });
             }
             res.json({ Total_Gemas: result[0].Total_Gemas });
         });
@@ -296,5 +296,6 @@ exports.getUserByIdAndAdminStatus = (req, res) => {
         });
     });
 };
+
 
 
