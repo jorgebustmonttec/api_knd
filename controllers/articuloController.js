@@ -68,7 +68,7 @@ exports.getArticulosByUsuario = (req, res) => {
 
 exports.getArticulosByUsuarioCarros = (req, res) => {
     const userId = req.params.id; // Get the user ID from the route parameter
-    const sql = 'SELECT au.idarticulo FROM articulousuario au JOIN articulos a ON au.idarticulo = a.idarticulo WHERE a.TipoArticuloID = 2 AND au.IdUsuario=1 '; // SQL query to fetch articles for a specific user
+    const sql = 'SELECT au.idarticulo FROM articulousuario au JOIN articulos a ON au.idarticulo = a.idarticulo WHERE a.TipoArticuloID = 2 AND au.IdUsuario=? '; // SQL query to fetch articles for a specific user
 
     db.query(sql, [userId], (err, results) => {
         if (err) {

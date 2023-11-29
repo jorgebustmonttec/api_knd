@@ -209,7 +209,7 @@ router.get('/usuarioArticulos/:id', articuloController.getArticulosByUsuario);
  *               type: array
  *               items:
  *                 type: object
- *                 properties:
+ *                 properties:  
  *                   IdArticulo:
  *                     type: integer
  *                     description: The unique identifier for the articulo.
