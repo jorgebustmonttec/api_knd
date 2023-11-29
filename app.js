@@ -5,7 +5,7 @@ const usuarioRoutes = require('./routes/usuarioRoutes');
 const articuloRoutes = require('./routes/articuloRoutes');
 const logJuegoRoutes = require('./routes/logJuegoRoutes');
 const transaccionesRoutes = require('./routes/transaccionesRoutes');
-
+const inventarioRoutes = require('./routes/inventarioRoutes');
 
 const app = express();
 const port = 3000;
@@ -45,6 +45,7 @@ app.use('/usuarios', usuarioRoutes);
 app.use('/articulos', articuloRoutes);
 app.use('/logJuego', logJuegoRoutes);
 app.use('/transacciones', transaccionesRoutes);
+app.use('/inventario', inventarioRoutes);
 
 
 

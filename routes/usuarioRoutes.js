@@ -229,78 +229,6 @@ router.get('/gems', usuarioController.getUserGems);
 
 /**
  * @swagger
- * /usuarios/{id}/inventario:
- *   get:
- *     summary: Retrieve the inventory of a specific usuario
- *     description: Retrieve the inventory details for a specific usuario.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the usuario to get the inventory for.
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: The inventory of the usuario.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   IdInventario:
- *                     type: integer
- *                     description: The unique identifier for the inventory entry.
- *                   IdUsuario:
- *                     type: integer
- *                   IdMarco:
- *                     type: integer
- *                   IdVehiculo:
- *                     type: integer
- *                   IdCabeza:
- *                     type: integer
- *                   IdCuerpo:
- *                     type: integer
- *       404:
- *         description: Usuario not found.
- */
-router.get('/:id/inventario', usuarioController.getUsuarioInventario);
-
-
-
-
-/**
- * @swagger
- * /usuarios/{id}/admin:
- *   get:
- *     summary: Check admin status of a usuario
- *     description: Retrieve the admin status for a specific usuario.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the usuario to check admin status for.
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Admin status of the usuario.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 Administrador:
- *                   type: boolean
- *       404:
- *         description: Usuario not found.
- */
-router.get('/:id/admin', usuarioController.checkAdminStatus);
-
-/**
- * @swagger
  * /usuarios/login:
  *   post:
  *     summary: Authenticate a usuario
@@ -383,6 +311,82 @@ router.get('/check-email', usuarioController.checkEmailExists);
  *         description: Server error.
  */
 router.get('/check-username', usuarioController.checkUsernameExists);
+
+
+
+
+/**
+ * @swagger
+ * /usuarios/{id}/inventario:
+ *   get:
+ *     summary: Retrieve the inventory of a specific usuario
+ *     description: Retrieve the inventory details for a specific usuario.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to get the inventory for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: The inventory of the usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   IdInventario:
+ *                     type: integer
+ *                     description: The unique identifier for the inventory entry.
+ *                   IdUsuario:
+ *                     type: integer
+ *                   IdMarco:
+ *                     type: integer
+ *                   IdVehiculo:
+ *                     type: integer
+ *                   IdCabeza:
+ *                     type: integer
+ *                   IdCuerpo:
+ *                     type: integer
+ *       404:
+ *         description: Usuario not found.
+ */
+router.get('/:id/inventario', usuarioController.getUsuarioInventario);
+
+
+
+
+/**
+ * @swagger
+ * /usuarios/{id}/admin:
+ *   get:
+ *     summary: Check admin status of a usuario
+ *     description: Retrieve the admin status for a specific usuario.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the usuario to check admin status for.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Admin status of the usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 Administrador:
+ *                   type: boolean
+ *       404:
+ *         description: Usuario not found.
+ */
+router.get('/:id/admin', usuarioController.checkAdminStatus);
+
 
 /**
  * @swagger
